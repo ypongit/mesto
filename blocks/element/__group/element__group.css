@@ -1,7 +1,7 @@
 .element__group {
   margin-right: 5px;
-  Width: 22px;
-  Height: 19px;
+  width: 22px;
+  height: 19px;
   background-image: url('../../../images/group.svg');
   background-repeat: no-repeat;
   background-size: contain;
