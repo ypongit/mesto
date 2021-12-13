@@ -13,3 +13,9 @@
   font-family: 'Inter', Arial, sans-serif;
 
 }
+@media screen and (max-width: 540px) {
+  .form {
+    width: 282px;
+    height: 322px;
+  }
+}
