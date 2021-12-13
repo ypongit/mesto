@@ -14,3 +14,12 @@
   background-image: url(../../../images/btn-save_hover.svg);
   cursor: pointer;
 }
+
+@media screen and (max-width: 540px) {
+  .form__submit {
+    width: 238px;
+    height: 46px;
+    margin-top: 45px;
+    margin-left: 22px;
+  }
+}
