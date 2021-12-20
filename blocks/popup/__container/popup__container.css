@@ -1,7 +1,6 @@
-.form__container {
+.popup__container {
   position: relative;
   width: 430px;
-  height: 330px;
   color: #000;
   background: #FFF;
   border-radius: 10px;
@@ -9,8 +8,7 @@
 }
 
 @media screen and (max-width: 540px) {
-  .form__container {
+  .popup__container {
     width: 282px;
-    height: 322px;
   }
 }

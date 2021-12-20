@@ -2,10 +2,14 @@
   margin-right: 5px;
   width: 22px;
   height: 19px;
+  border: 0;
+  padding: 0;
+  background: transparent;
   background-image: url('../../../images/group.svg');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+  cursor: pointer;
 }
 .element__group:hover {
   opacity: 0.5;
