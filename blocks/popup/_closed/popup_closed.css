@@ -1,7 +1,6 @@
-.popup_opened {
+.popup_closed {
+  visibility: hidden;
   display: flex;
-  visibility: visible;
-  opacity: 1;
+  opacity: 0;
   transition: visibility 1s, opacity 0.5s linear;
-
 }

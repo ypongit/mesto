@@ -1,4 +1,4 @@
-.element__group {
+.element__like-button {
   margin-right: 5px;
   width: 22px;
   height: 19px;
@@ -11,10 +11,12 @@
   background-position: center;
   cursor: pointer;
 }
-.element__group:hover {
+.element__like-button:hover {
   opacity: 0.5;
 }
-.element__group:active {
+/*
+.element__like-button:active {
   background-image: url('../../../images/group_act.svg');
   opacity: 1;
 }
+*/
