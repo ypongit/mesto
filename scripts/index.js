@@ -32,9 +32,9 @@ const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__text');
 // Модальные окна
 const Modal = document.querySelector('.popup');
-const editForm = document.querySelector('.popup__type_edit');  // Выбор формы редактирования
-const addForm = document.querySelector('.popup__type_add-card');
-const imageModal = document.querySelector('.popup__type_image');  // Окно картинки
+const editForm = document.querySelector('.popup_type_edit');  // Выбор формы редактирования
+const addForm = document.querySelector('.popup_type_add-card');
+const imageModal = document.querySelector('.popup_type_image');  // Окно картинки
 // Формы
 const mainEditForm = editForm.querySelector('.popup__main-container');
 const mainAddForm = addForm.querySelector('.popup__main-container');
