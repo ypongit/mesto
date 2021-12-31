@@ -92,7 +92,10 @@ function deleteHandler(e){
   // console.log('e => ', e)
   e.target.closest('.element').remove()
 }
-
+// Функция установки лайка
+function toggleLike(evt){
+  evt.target.classList.toggle('element__like-button_active')
+}
 
 function createCard(cardData){
   // склонировать шаблон
@@ -129,10 +132,7 @@ function renderCard (){
   //
 }
 renderCard()
-// Функция установки лайка
-function toggleLike(evt){
-  evt.target.classList.toggle('element__like-button_active')
-}
+
 
 
 
