@@ -31,10 +31,11 @@ const cardTemplate = document.querySelector('.element-template').content;
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__text');
 // Модальные окна
-const Modal = document.querySelector('.popup');
 const editForm = document.querySelector('.popup_type_edit');  // Выбор формы редактирования
 const addForm = document.querySelector('.popup_type_add-card');
 const imageModal = document.querySelector('.popup_type_image');  // Окно картинки
+const modalPicture = imageModal.querySelector('.popup__image')
+const modalCaption = imageModal.querySelector('.popup__caption')
 // Формы
 const mainEditForm = editForm.querySelector('.popup__main-container');
 const mainAddForm = addForm.querySelector('.popup__main-container');
@@ -43,37 +44,46 @@ const editFormButton = document.querySelector('.profile__edit-button'); //Кно
 const editFormCloseButton = editForm.querySelector('.popup__close');  // Кнопка закрытия формы редактирования
 const addCardButton = document.querySelector('.profile__add-button'); // Кнопка добавления карточки
 const addFormCloseButton = addForm.querySelector('.popup__close');
+const imageModalCloseButton = imageModal.querySelector('.popup__close');
 // Поля ввода
 const inputCardName = document.querySelector('.popup__field_card_name');
 const inputCardLink = document.querySelector('.popup__field_card_link');
 const inputProfileName = document.querySelector('.popup__field_el_name');
 const inputProfileDescription = document.querySelector('.popup__field_el_description');
 
-function toggleForm(modal){
-  modal.classList.toggle('popup_closed')
-  modal.classList.toggle('popup_opened')
+// Открытие и закрытие модальных окон
+function openModal(modal){
+  modal.classList.add('popup_opened')
 }
-// Показ- скрытие формы редактирования
-editFormButton.addEventListener('click', () => toggleForm(editForm));
-editFormCloseButton.addEventListener('click', () => toggleForm(editForm));
-// Показ- скрытие формы добавления
-addCardButton.addEventListener('click', () => toggleForm(addForm));
-addFormCloseButton.addEventListener ('click', () => toggleForm(addForm));
+function closeModal(modal){
+  modal.classList.remove('popup_opened')
+}
+// Показ, скрытие формы редактирования
+editFormButton.addEventListener('click', () => openModal(editForm));
+editFormCloseButton.addEventListener('click', () => closeModal(editForm));
+// Показ, скрытие формы добавления
+addCardButton.addEventListener('click', () => openModal(addForm));
+addFormCloseButton.addEventListener ('click', () => closeModal(addForm));
+
+imageModalCloseButton.addEventListener('click', () => {
+  closeModal(imageModal);
+})
 
 mainAddForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  createCard({
+  const el = createCard({
     name: inputCardName.value,
     link: inputCardLink.value
   })
-  toggleForm(addForm);
+  list.append(el);
+  closeModal(addForm);
 })
 
 mainEditForm.addEventListener('submit', formSubmitHandler);
 // Обработчик «отправки» формы
 function formSubmitHandler (evt){
   evt.preventDefault();
-  toggleForm(editForm);
+  closeModal(editForm);
   profileTitle.textContent = inputProfileName.value;
   profileDescription.textContent = inputProfileDescription.value;
 }
@@ -93,41 +103,37 @@ function createCard(cardData){
   const cardTitle = cardElement.querySelector('.element__heading-text')
   const deleteButton = cardElement.querySelector('.element__delete-button')
   const likeButton = cardElement.querySelector('.element__like-button')
-  const imageModalCloseButton = imageModal.querySelector('.popup__close')
 
   cardTitle.textContent = cardData.name
   cardImage.src = cardData.link
   deleteButton.addEventListener('click', deleteHandler)
-  likeButton.addEventListener('click', () => toggleLike(likeButton))
+  likeButton.addEventListener('click', toggleLike)  // Поставь лайк
 
-  function toggleImageForm(imgModal){
-    imgModal.classList.toggle('popup_closed')
-    imgModal.classList.toggle('popup_opened')
-  }
-  cardImage.addEventListener('click', () => {toggleImageForm(imageModal)
-    const modalPicture = imageModal.querySelector('.popup__image')
-    const modalCaption = imageModal.querySelector('.popup__caption')
+  cardImage.addEventListener('click', () => {openModal(imageModal)
     modalPicture.src = cardData.link
     modalCaption.textContent = cardData.name
-    console.log('imageModal => ', imageModal)
     currentImageModal = imageModal
-  })  //imageModal
-  imageModalCloseButton.addEventListener('click', () => {
-    //toggleImageForm(imageModal)
-    imageModal.classList.remove('popup_opened');
-    imageModal.classList.add('popup_closed');
-  })/**/
+  })
 
-  function toggleLike(like){
-    likeButton.classList.toggle('element__like-button_active')
-  }
-
-  // вставить на страницу
-  list.prepend(cardElement)
+  return cardElement;
 }
 
-// Заполнение страницы карточками
-initialCards.forEach(createCard)
+function renderCard (){
+  // Заполнение страницы карточками
+  initialCards.forEach(function (card){
+    // console.log('card => ', card)
+    const el = createCard(card)
+    // вставить на страницу
+    list.prepend(el)
+  })
+  //
+}
+renderCard()
+// Функция установки лайка
+function toggleLike(evt){
+  evt.target.classList.toggle('element__like-button_active')
+}
+
 
 
 
