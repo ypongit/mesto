@@ -79,13 +79,13 @@ mainAddForm.addEventListener('submit', (evt) => {
   closeModal(addForm);
 })
 
-mainEditForm.addEventListener('submit', formSubmitHandler);
+mainEditForm.addEventListener('submit', submitFormHandler);
 // Обработчик «отправки» формы
-function formSubmitHandler (evt){
+function submitFormHandler (evt){
   evt.preventDefault();
-  closeModal(editForm);
   profileTitle.textContent = inputProfileName.value;
   profileDescription.textContent = inputProfileDescription.value;
+  closeModal(editForm);
 }
 
 function deleteHandler(e){
