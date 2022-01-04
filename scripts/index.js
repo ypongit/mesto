@@ -59,10 +59,16 @@ function closeModal(modal){
   modal.classList.remove('popup_opened')
 }
 // Показ, скрытие формы редактирования
-editFormButton.addEventListener('click', () => openModal(editForm));
+editFormButton.addEventListener('click', () => {
+  openModal(editForm);
+  inputProfileName.value = profileTitle.textContent;
+  inputProfileDescription.value = profileDescription.textContent;
+} );
 editFormCloseButton.addEventListener('click', () => closeModal(editForm));
 // Показ, скрытие формы добавления
-addCardButton.addEventListener('click', () => openModal(addForm));
+addCardButton.addEventListener('click', () => {
+  openModal(addForm);
+});
 addFormCloseButton.addEventListener ('click', () => closeModal(addForm));
 
 imageModalCloseButton.addEventListener('click', () => {
@@ -75,8 +81,10 @@ mainAddForm.addEventListener('submit', (evt) => {
     name: inputCardName.value,
     link: inputCardLink.value
   })
-  list.append(el);
+  list.prepend(el);
   closeModal(addForm);
+  inputCardName.value = null;
+  inputCardLink.value = null;
 })
 
 mainEditForm.addEventListener('submit', submitFormHandler);
@@ -89,7 +97,6 @@ function submitFormHandler (evt){
 }
 
 function deleteHandler(e){
-  // console.log('e => ', e)
   e.target.closest('.element').remove()
 }
 // Функция установки лайка
@@ -108,7 +115,8 @@ function createCard(cardData){
   const likeButton = cardElement.querySelector('.element__like-button')
 
   cardTitle.textContent = cardData.name
-  cardImage.src = cardData.link
+  cardImage.style.backgroundImage = `url(${cardData.link})`
+  // cardImage.src = cardData.link
   deleteButton.addEventListener('click', deleteHandler)
   likeButton.addEventListener('click', toggleLike)  // Поставь лайк
 
@@ -124,28 +132,9 @@ function createCard(cardData){
 function renderCard (){
   // Заполнение страницы карточками
   initialCards.forEach(function (card){
-    // console.log('card => ', card)
     const el = createCard(card)
     // вставить на страницу
     list.prepend(el)
   })
-  //
 }
 renderCard()
-
-
-
-
-
-/*
-function toggleForm() {
-  form.classList.toggle('form_opened');
-}
-
-function closeFormOnOverlayClick(event) {
-  if (event.target === event.currentTarget){
-    form.classList.remove('popup_opened');
-  }
-}
-form.addEventListener('click', closeFormOnOverlayClick);
-*/
