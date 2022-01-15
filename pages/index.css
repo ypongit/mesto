@@ -29,12 +29,15 @@
 @import url("../blocks/popup/__heading/popup__heading.css");
 @import url("../blocks/popup/__field/popup__field.css");
 @import url("../blocks/popup/__submit/popup__submit.css");
+@import url("../blocks/popup/__submit/popup__submit_inactive.css");
 @import url("../blocks/popup/__main-container/popup__main-container.css");
 @import url("../blocks/popup/_opened/popup_opened.css");
 @import url("../blocks/popup/_closed/popup_closed.css");
-
 @import url("../blocks/popup/__image-container/popup__image-container.css");
 @import url("../blocks/popup/__image/popup__image.css");
 @import url("../blocks/popup/__caption/popup__caption.css");
+@import url("../blocks/popup/__field/popup__field_type_error.css");
+@import url("../blocks/popup/__field/popup__field_error_active.css");
+
 
 @import url("../blocks/");

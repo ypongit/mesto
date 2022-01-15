@@ -31,11 +31,12 @@ const cardTemplate = document.querySelector('.element-template').content;
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__text');
 // Модальные окна
+const popup = document.querySelector('.popup');
 const editForm = document.querySelector('.popup_type_edit');  // Выбор формы редактирования
 const addForm = document.querySelector('.popup_type_add-card');
 const imageModal = document.querySelector('.popup_type_image');  // Окно картинки
-const modalPicture = imageModal.querySelector('.popup__image')
-const modalCaption = imageModal.querySelector('.popup__caption')
+const modalPicture = imageModal.querySelector('.popup__image');
+const modalCaption = imageModal.querySelector('.popup__caption');
 // Формы
 const mainEditForm = editForm.querySelector('.popup__main-container');
 const mainAddForm = addForm.querySelector('.popup__main-container');
@@ -58,6 +59,7 @@ function openModal(modal){
 function closeModal(modal){
   modal.classList.remove('popup_opened')
 }
+
 // Показ, скрытие формы редактирования
 editFormButton.addEventListener('click', () => {
   openModal(editForm);
@@ -70,11 +72,31 @@ addCardButton.addEventListener('click', () => {
   openModal(addForm);
 });
 addFormCloseButton.addEventListener ('click', () => closeModal(addForm));
-
+// Закрытие формы показа картинок
 imageModalCloseButton.addEventListener('click', () => {
   closeModal(imageModal);
 })
-
+// Закрытие формы по клику на свободном от формы месте
+const closeModalOnOverlayClick = () => {
+  const popupList = Array.from(document.querySelectorAll('.popup'));
+  popupList.forEach((popupElement) => {
+    popupElement.addEventListener('click', (evt) => {
+      if(evt.target === evt.currentTarget){
+        closeModal(popupElement);
+      }
+    });
+  });
+};
+closeModalOnOverlayClick ();
+/* Функция закрытия модального окна по клавише "Escape" */
+document.addEventListener('keydown', function(evt){
+  if (evt.key === 'Escape'){
+    const popupList = Array.from(document.querySelectorAll('.popup'));
+    popupList.forEach((popupElement) => {
+      closeModal(popupElement);
+    });
+  }
+});
 mainAddForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const el = createCard({
@@ -137,4 +159,4 @@ function renderCard (){
     list.prepend(el)
   })
 }
-renderCard()
+renderCard();
