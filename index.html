@@ -88,10 +88,10 @@
       <button type="button" class="popup__close"></button>
       <h2 class="popup__heading">Редактировать профиль</h2>
         <form class="popup__main-container" name="place_edit">
-          <input type="text" name="el_name" id="el_name-input" class="popup__field popup__field_el_name" placeholder="Имя" required minlength="2" maxlength="40">
-          <span class="el_name-input-error popup__field-error"></span>
-          <input type="text" name="el_description" id="el_description-input" class="popup__field popup__field_el_description" placeholder="О себе" required minlength="2" maxlength="200">
-          <span class="el_description-input-error popup__field-error"></span>
+          <input type="text" name="el_name" id="el-name-input" class="popup__field popup__field_el_name" placeholder="Имя" required minlength="2" maxlength="40">
+          <span class="el-name-input-error popup__field-error"></span>
+          <input type="text" name="el-description" id="el-description-input" class="popup__field popup__field_el_description" placeholder="О себе" required minlength="2" maxlength="200">
+          <span class="el-description-input-error popup__field-error"></span>
           <button type="submit" class="popup__submit">Сохранить</button>
         </form>
     </div>
@@ -102,10 +102,10 @@
       <button type="button" class="popup__close"></button>
       <h2 class="popup__heading">Новое место</h2>
         <form class="popup__main-container" name="place_edit">
-          <input type="text" name="card_name" id="card_name-input" class="popup__field popup__field_card_name" placeholder="Название" required minlength="2" maxlength="30">
-          <span class="popup__field-error card_name-input-error"></span>
-          <input type="url" name="image_link" id="image_link-input" class="popup__field popup__field_card_link" placeholder="Ссылка на картинку" required>
-          <span class="popup__field-error image_link-input-error"></span>
+          <input type="text" name="card_name" id="card-name-input" class="popup__field popup__field_card_name" placeholder="Название" required minlength="2" maxlength="30">
+          <span class="popup__field-error card-name-input-error"></span>
+          <input type="url" name="image_link" id="image-link-input" class="popup__field popup__field_card_link" placeholder="Ссылка на картинку" required>
+          <span class="popup__field-error image-link-input-error"></span>
           <button type="submit" class="popup__submit">Создать</button>
         </form>
     </div>
@@ -136,3 +136,9 @@
 
 </html>
 
+<!--
+  Файл: index.html, строка: 92. Либо класс el_name-input-error написан не по БЭМ, либо возникла проблема с вложенностью.
+  Файл: index.html, строка: 94. Либо класс el_description-input-error написан не по БЭМ, либо возникла проблема с вложенностью.
+  Файл: index.html, строка: 106. Либо класс card_name-input-error написан не по БЭМ, либо возникла проблема с вложенностью.
+  Файл: index.html, строка: 108. Либо класс image_link-input-error написан не по БЭМ, либо возникла проблема с вложенностью.
+-->
