@@ -1,31 +1,4 @@
-// Массив информации для карточек
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-const list = document.querySelector('.elements');
+const list = document.querySelector('.elements'); // раздел карточек
 const cardTemplate = document.querySelector('.element-template').content;
 // Профиль
 const profileTitle = document.querySelector('.profile__title');
@@ -54,10 +27,11 @@ const inputProfileDescription = document.querySelector('.popup__field_el_descrip
 
 // Открытие и закрытие модальных окон
 function openModal(modal){
-  modal.classList.add('popup_opened')
+  modal.classList.add('popup_opened');
+  closeModalOnEscClick(modal);
 }
 function closeModal(modal){
-  modal.classList.remove('popup_opened')
+  modal.classList.remove('popup_opened');
 }
 
 // Показ, скрытие формы редактирования
@@ -88,15 +62,18 @@ const closeModalOnOverlayClick = () => {
   });
 };
 closeModalOnOverlayClick ();
+
 /* Функция закрытия модального окна по клавише "Escape" */
-document.addEventListener('keydown', function(evt){
-  if (evt.key === 'Escape'){
-    const popupList = Array.from(document.querySelectorAll('.popup'));
-    popupList.forEach((popupElement) => {
-      closeModal(popupElement);
-    });
-  }
-});
+const closeModalOnEscClick = (currentForm) => {
+  document.addEventListener('keydown', escHandler);
+  function escHandler (evt){
+    if (evt.key === 'Escape'){
+      closeModal(currentForm);
+      document.removeEventListener('keydown', escHandler);
+    };
+  };
+};
+
 mainAddForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const el = createCard({
@@ -130,7 +107,6 @@ function createCard(cardData){
   // склонировать шаблон
   const cardElement = cardTemplate.cloneNode(true)
   // заполнить данными
-
   const cardImage = cardElement.querySelector('.element__image')
   const cardTitle = cardElement.querySelector('.element__heading-text')
   const deleteButton = cardElement.querySelector('.element__delete-button')

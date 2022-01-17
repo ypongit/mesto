@@ -1,7 +1,8 @@
 .popup__field_error_active {
   opacity: 1;
+  display: inline-block;
   margin-left: 36px;
-  margin-bottom: 5px;
+  margin-top: 5px;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
