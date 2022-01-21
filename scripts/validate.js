@@ -11,7 +11,6 @@ const showInputError = (formElement, inputElement, errorMessage, validSettings) 
 
 const hideInputError = (formElement, inputElement, validSettings) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  //inputElement.classList.remove('popup__field_type_error');
   // Скрываем сообщение об ошибке
   inputElement.classList.remove(validSettings.inputErrorClass);
   errorElement.classList.remove(validSettings.errorClass);
@@ -30,6 +29,7 @@ const checkInputValidity = (formElement, inputElement, validSettings) => {
 // деактивация кнопки
 const buttonDeactive = (btn, btnDeact) => {
   btn.classList.add(btnDeact);
+  btn.disabled = true;
 };
 
 // проверяем форму на наличие поля, не прошедшего проверку
@@ -42,9 +42,10 @@ const hasInvalidInput = (inputList) => {
 // смена состояния кнопки активная|неактивная
 const toggleButtonState = (inputList, buttonElement, validSettings) => {
   if(hasInvalidInput(inputList)){
-    buttonElement.classList.add(validSettings.inactiveButtonClass);
+    buttonDeactive(buttonElement, validSettings.inactiveButtonClass);
   } else {
     buttonElement.classList.remove(validSettings.inactiveButtonClass);
+    buttonElement.disabled= false;
   }
 };
 
@@ -67,8 +68,6 @@ const enableValidation = (validSettings) => {
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    const btnSubmit = formElement.querySelector(validSettings.submitButtonSelector);
-    buttonDeactive(btnSubmit, validSettings.inactiveButtonClass);
   });
   setEventListeners(formElement, validSettings);
 });

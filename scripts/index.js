@@ -25,13 +25,24 @@ const inputCardLink = document.querySelector('.popup__field_card_link');
 const inputProfileName = document.querySelector('.popup__field_el_name');
 const inputProfileDescription = document.querySelector('.popup__field_el_description');
 
-// Открытие и закрытие модальных окон
+// Открытие модального окна function(evt){}
 function openModal(modal){
   modal.classList.add('popup_opened');
-  closeModalOnEscClick(modal);
+  closeModalOnOverlayClick ();
+  document.addEventListener('keydown', escHandler, {once: true}); // слушатель ESC
 }
+// Закрытие модального окна
 function closeModal(modal){
   modal.classList.remove('popup_opened');
+  document.removeEventListener('keydown', escHandler, {once: true});  // Удаление слушателя ESC
+}
+
+/* Функция закрытия модального окна по клавише "Escape" */
+function escHandler(evt){
+  const currentForm = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape'){
+    closeModal(currentForm);
+  };
 }
 
 // Показ, скрытие формы редактирования
@@ -61,18 +72,7 @@ const closeModalOnOverlayClick = () => {
     });
   });
 };
-closeModalOnOverlayClick ();
-
-/* Функция закрытия модального окна по клавише "Escape" */
-const closeModalOnEscClick = (currentForm) => {
-  document.addEventListener('keydown', escHandler);
-  function escHandler (evt){
-    if (evt.key === 'Escape'){
-      closeModal(currentForm);
-      document.removeEventListener('keydown', escHandler);
-    };
-  };
-};
+// closeModalOnOverlayClick ();
 
 mainAddForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
