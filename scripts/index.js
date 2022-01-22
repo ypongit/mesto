@@ -55,6 +55,7 @@ editFormCloseButton.addEventListener('click', () => closeModal(editForm));
 // Показ, скрытие формы добавления
 addCardButton.addEventListener('click', () => {
   openModal(addForm);
+
 });
 addFormCloseButton.addEventListener ('click', () => closeModal(addForm));
 // Закрытие формы показа картинок

@@ -1,28 +1,28 @@
 //<<<<<<<<<<<<<<<<<<<<< Валидация форм >>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // присвоение, сброс класса ошибки полю ввода
-const showInputError = (formElement, inputElement, errorMessage, validSettings) => {
+const showInputError = (formElement, inputElement, errorMessage, {inputErrorClass, errorClass}) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   // Показываем сообщение об ошибке
-  inputElement.classList.add(validSettings.inputErrorClass);
+  inputElement.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add(validSettings.errorClass);
+  errorElement.classList.add(errorClass);
 };
 
-const hideInputError = (formElement, inputElement, validSettings) => {
+const hideInputError = (formElement, inputElement, {inputErrorClass, errorClass}) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   // Скрываем сообщение об ошибке
-  inputElement.classList.remove(validSettings.inputErrorClass);
-  errorElement.classList.remove(validSettings.errorClass);
+  inputElement.classList.remove(inputErrorClass);
+  errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
 };
 
 // проверка корректности введенных данных
-const checkInputValidity = (formElement, inputElement, validSettings) => {
+const checkInputValidity = (formElement, inputElement, classes) => {
   if (!inputElement.validity.valid){
-    showInputError(formElement, inputElement, inputElement.validationMessage, validSettings);
+    showInputError(formElement, inputElement, inputElement.validationMessage, classes);
   }else{
-    hideInputError(formElement, inputElement, validSettings);
+    hideInputError(formElement, inputElement, classes);
   }
 };
 
@@ -40,36 +40,37 @@ const hasInvalidInput = (inputList) => {
 };
 
 // смена состояния кнопки активная|неактивная
-const toggleButtonState = (inputList, buttonElement, validSettings) => {
+const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
   if(hasInvalidInput(inputList)){
-    buttonDeactive(buttonElement, validSettings.inactiveButtonClass);
+    buttonDeactive(buttonElement, inactiveButtonClass);
   } else {
-    buttonElement.classList.remove(validSettings.inactiveButtonClass);
-    buttonElement.disabled= false;
+    buttonElement.classList.remove(inactiveButtonClass);
+    buttonElement.disabled = false;
   }
 };
 
 // уcтановка слушателей на поля ввода формы
-const setEventListeners = (formElement, validSettings) => {
-  const buttonElement = formElement.querySelector(validSettings.submitButtonSelector);
-  const inputList = Array.from(formElement.querySelectorAll(validSettings.inputSelector));
-  toggleButtonState(inputList, buttonElement, validSettings);
+const setEventListeners = (formElement, buttonElement, inactiveButtonClass, classes) => {
+  const inputList = Array.from(formElement.querySelectorAll(classes.inputSelector));
+  toggleButtonState(inputList, buttonElement, inactiveButtonClass);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function() {
-      checkInputValidity(formElement, inputElement, validSettings);
-      toggleButtonState(inputList, buttonElement, validSettings);
+      checkInputValidity(formElement, inputElement, classes);
+      toggleButtonState(inputList, buttonElement, inactiveButtonClass);
     });
   });
 };
 
 // функция запуска проверки
-const enableValidation = (validSettings) => {
-  const formList = Array.from(document.querySelectorAll(validSettings.formSelector));
+const enableValidation = ({formSelector, submitButtonSelector, inactiveButtonClass, ...rest}) => {
+  const formList = Array.from(document.querySelectorAll(formSelector));
   formList.forEach((formElement) => {
+    const buttonElement = formElement.querySelector(submitButtonSelector);
     formElement.addEventListener('submit', (evt) => {
-    evt.preventDefault();
+      evt.preventDefault();
+      buttonDeactive(buttonElement, inactiveButtonClass);
   });
-  setEventListeners(formElement, validSettings);
+  setEventListeners(formElement, buttonElement, inactiveButtonClass, rest);
 });
 };
 
