@@ -28,13 +28,12 @@ const inputProfileDescription = document.querySelector('.popup__field_el_descrip
 // Открытие модального окна function(evt){}
 function openModal(modal){
   modal.classList.add('popup_opened');
-  closeModalOnOverlayClick ();
-  document.addEventListener('keydown', escHandler, {once: true}); // слушатель ESC
+  document.addEventListener('keydown', escHandler); // слушатель ESC
 }
 // Закрытие модального окна
 function closeModal(modal){
   modal.classList.remove('popup_opened');
-  document.removeEventListener('keydown', escHandler, {once: true});  // Удаление слушателя ESC
+  document.removeEventListener('keydown', escHandler);  // Удаление слушателя ESC
 }
 
 /* Функция закрытия модального окна по клавише "Escape" */
@@ -73,7 +72,7 @@ const closeModalOnOverlayClick = () => {
     });
   });
 };
-// closeModalOnOverlayClick ();
+closeModalOnOverlayClick ();
 
 mainAddForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
@@ -97,32 +96,32 @@ function submitFormHandler (evt){
 }
 
 function deleteHandler(e){
-  e.target.closest('.element').remove()
+  e.target.closest('.element').remove();
 }
 // Функция установки лайка
 function toggleLike(evt){
-  evt.target.classList.toggle('element__like-button_active')
+  evt.target.classList.toggle('element__like-button_active');
 }
 
 function createCard(cardData){
   // склонировать шаблон
-  const cardElement = cardTemplate.cloneNode(true)
+  const cardElement = cardTemplate.cloneNode(true);
   // заполнить данными
-  const cardImage = cardElement.querySelector('.element__image')
-  const cardTitle = cardElement.querySelector('.element__heading-text')
-  const deleteButton = cardElement.querySelector('.element__delete-button')
-  const likeButton = cardElement.querySelector('.element__like-button')
+  const cardImage = cardElement.querySelector('.element__image');
+  const cardTitle = cardElement.querySelector('.element__heading-text');
+  const deleteButton = cardElement.querySelector('.element__delete-button');
+  const likeButton = cardElement.querySelector('.element__like-button');
 
-  cardTitle.textContent = cardData.name
-  cardImage.style.backgroundImage = `url(${cardData.link})`
+  cardTitle.textContent = cardData.name;
+  cardImage.style.backgroundImage = `url(${cardData.link})`;
   // cardImage.src = cardData.link
-  deleteButton.addEventListener('click', deleteHandler)
-  likeButton.addEventListener('click', toggleLike)  // Поставь лайк
+  deleteButton.addEventListener('click', deleteHandler);
+  likeButton.addEventListener('click', toggleLike);  // Поставь лайк
 
   cardImage.addEventListener('click', () => {openModal(imageModal)
-    modalPicture.src = cardData.link
-    modalCaption.textContent = cardData.name
-    currentImageModal = imageModal
+    modalPicture.src = cardData.link;
+    modalCaption.textContent = cardData.name;
+    // currentImageModal = imageModal
   })
 
   return cardElement;
@@ -131,9 +130,9 @@ function createCard(cardData){
 function renderCard (){
   // Заполнение страницы карточками
   initialCards.forEach(function (card){
-    const el = createCard(card)
+    const el = createCard(card);
     // вставить на страницу
-    list.prepend(el)
+    list.prepend(el);
   })
 }
 renderCard();
