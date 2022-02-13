@@ -1,5 +1,13 @@
+export const validationConfig = {
+  formSelector: '.popup__main-container',
+  inputSelector: '.popup__field',
+  submitButtonSelector: '.popup__submit',
+  inactiveButtonClass: 'popup__submit_inactive',
+  inputErrorClass: 'popup__field_type_error',
+  errorClass: 'popup__field_error_active'
+}
 // Массив информации для карточек
-const initialCards = [
+export const initialCards = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'

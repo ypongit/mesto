@@ -1,5 +1,8 @@
+import { FormValidator } from './FormValidator.js';
+import { validationConfig, initialCards } from './constants.js';
+import { Card } from './Card.js';
 const list = document.querySelector('.elements'); // раздел карточек
-const cardTemplate = document.querySelector('.element-template').content;
+// const cardTemplate = document.querySelector('.element-template').content;
 // Профиль
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__text');
@@ -10,6 +13,10 @@ const addForm = document.querySelector('.popup_type_add-card');
 const imageModal = document.querySelector('.popup_type_image');  // Окно картинки
 const modalPicture = imageModal.querySelector('.popup__image');
 const modalCaption = imageModal.querySelector('.popup__caption');
+
+// const editForm = document.querySelector('.popup_type_edit');
+// const addCardForm = document.querySelector('.popup_type_add-card');
+
 // Формы
 const mainEditForm = editForm.querySelector('.popup__main-container');
 const mainAddForm = addForm.querySelector('.popup__main-container');
@@ -24,8 +31,14 @@ const inputCardName = document.querySelector('.popup__field_card_name');
 const inputCardLink = document.querySelector('.popup__field_card_link');
 const inputProfileName = document.querySelector('.popup__field_el_name');
 const inputProfileDescription = document.querySelector('.popup__field_el_description');
+// Для каждой проверяемой формы создайте экземпляр класса FormValidator.
+const editFormValidator = new FormValidator(validationConfig, mainEditForm);
+const addFormValidator = new FormValidator(validationConfig, mainAddForm);
 
-// Открытие модального окна function(evt){}
+// Запуск функции валидации для каждой из форм.
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
+// Открытие модального окна
 function openModal(modal){
   modal.classList.add('popup_opened');
   document.addEventListener('keydown', escHandler); // слушатель ESC
@@ -76,14 +89,24 @@ closeModalOnOverlayClick ();
 
 mainAddForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  const el = createCard({
+  const item = {
     name: inputCardName.value,
     link: inputCardLink.value
-  })
-  list.prepend(el);
+  }
+  const card = new Card(item, '.element-template');
+  const cardElement = card.createCard();
+
+  list.prepend(cardElement);
+
+  /* const el = createCard({
+    name: inputCardName.value,
+    link: inputCardLink.value
+  });
+  list.prepend(el); */
   closeModal(addForm);
   inputCardName.value = null;
   inputCardLink.value = null;
+
 })
 
 mainEditForm.addEventListener('submit', submitFormHandler);
@@ -94,16 +117,22 @@ function submitFormHandler (evt){
   profileDescription.textContent = inputProfileDescription.value;
   closeModal(editForm);
 }
-
+ initialCards.forEach((item) => {
+  // Для каждой карточки создайте экземпляр класса Card.
+  const card = new Card(item, '.element-template');
+  const cardElement = card.createCard();
+  document.querySelector('.elements').prepend(cardElement); // list
+})
+/*
 function deleteHandler(e){
   e.target.closest('.element').remove();
 }
 // Функция установки лайка
-function toggleLike(evt){
+ function toggleLike(evt){
   evt.target.classList.toggle('element__like-button_active');
-}
+} */
 
-function createCard(cardData){
+/* function createCard(cardData){
   // склонировать шаблон
   const cardElement = cardTemplate.cloneNode(true);
   // заполнить данными
@@ -121,7 +150,6 @@ function createCard(cardData){
   cardImage.addEventListener('click', () => {openModal(imageModal)
     modalPicture.src = cardData.link;
     modalCaption.textContent = cardData.name;
-    // currentImageModal = imageModal
   })
 
   return cardElement;
@@ -136,3 +164,4 @@ function renderCard (){
   })
 }
 renderCard();
+*/

@@ -61,7 +61,7 @@ const setEventListeners = (formElement, buttonElement, inactiveButtonClass, clas
   });
 };
 
-// функция запуска проверки
+// функция проверки:
 const enableValidation = ({formSelector, submitButtonSelector, inactiveButtonClass, ...rest}) => {
   const formList = Array.from(document.querySelectorAll(formSelector));
   formList.forEach((formElement) => {
@@ -73,7 +73,7 @@ const enableValidation = ({formSelector, submitButtonSelector, inactiveButtonCla
   setEventListeners(formElement, buttonElement, inactiveButtonClass, rest);
 });
 };
-
+// Запуск функции проверки
 enableValidation({
   formSelector: '.popup__main-container',
   inputSelector: '.popup__field',
