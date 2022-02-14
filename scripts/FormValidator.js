@@ -77,6 +77,7 @@ _setEventListeners = () => {
 enableValidation (){
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
+      this._disableSubmitButton();
   });
     this._disableSubmitButton();
     this._setEventListeners();

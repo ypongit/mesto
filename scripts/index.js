@@ -14,9 +14,6 @@ const imageModal = document.querySelector('.popup_type_image');  // Окно к�
 const modalPicture = imageModal.querySelector('.popup__image');
 const modalCaption = imageModal.querySelector('.popup__caption');
 
-// const editForm = document.querySelector('.popup_type_edit');
-// const addCardForm = document.querySelector('.popup_type_add-card');
-
 // Формы
 const mainEditForm = editForm.querySelector('.popup__main-container');
 const mainAddForm = addForm.querySelector('.popup__main-container');
