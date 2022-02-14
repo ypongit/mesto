@@ -84,18 +84,3 @@ enableValidation (){
   }
 }
 
-/* const config = {
-  formSelector: '.popup__main-container',
-  inputSelector: '.popup__field',
-  submitButtonSelector: '.popup__submit',
-  inactiveButtonClass: 'popup__submit_inactive',
-  inputErrorClass: 'popup__field_type_error',
-  errorClass: 'popup__field_error_active'
-}
-
-const editForm = document.querySelector('.popup popup_type_edit');
-const addCardForm = document.querySelector('.popup popup_type_add-card');
-
-// Для каждой проверяемой формы создайте экземпляр класса FormValidator.
-const editFormValidator = new FormValidator(config, editForm);
-const addFormValidator = new FormValidator(config, addCardForm); */

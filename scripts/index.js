@@ -1,6 +1,9 @@
 import { FormValidator } from './FormValidator.js';
 import { validationConfig, initialCards } from './constants.js';
+import {imageModal, modalPicture, modalCaption} from './constants.js';
 import { Card } from './Card.js';
+import { openModal, closeModal, escHandler } from './utils.js';
+
 const list = document.querySelector('.elements'); // раздел карточек
 // const cardTemplate = document.querySelector('.element-template').content;
 // Профиль
@@ -10,9 +13,6 @@ const profileDescription = document.querySelector('.profile__text');
 const popup = document.querySelector('.popup');
 const editForm = document.querySelector('.popup_type_edit');  // Выбор формы редактирования
 const addForm = document.querySelector('.popup_type_add-card');
-const imageModal = document.querySelector('.popup_type_image');  // Окно картинки
-const modalPicture = imageModal.querySelector('.popup__image');
-const modalCaption = imageModal.querySelector('.popup__caption');
 
 // Формы
 const mainEditForm = editForm.querySelector('.popup__main-container');
@@ -35,24 +35,6 @@ const addFormValidator = new FormValidator(validationConfig, mainAddForm);
 // Запуск функции валидации для каждой из форм.
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
-// Открытие модального окна
-function openModal(modal){
-  modal.classList.add('popup_opened');
-  document.addEventListener('keydown', escHandler); // слушатель ESC
-}
-// Закрытие модального окна
-function closeModal(modal){
-  modal.classList.remove('popup_opened');
-  document.removeEventListener('keydown', escHandler);  // Удаление слушателя ESC
-}
-
-/* Функция закрытия модального окна по клавише "Escape" */
-function escHandler(evt){
-  const currentForm = document.querySelector('.popup_opened');
-  if (evt.key === 'Escape'){
-    closeModal(currentForm);
-  };
-}
 
 // Показ, скрытие формы редактирования
 editFormButton.addEventListener('click', () => {
@@ -95,11 +77,6 @@ mainAddForm.addEventListener('submit', (evt) => {
 
   list.prepend(cardElement);
 
-  /* const el = createCard({
-    name: inputCardName.value,
-    link: inputCardLink.value
-  });
-  list.prepend(el); */
   closeModal(addForm);
   inputCardName.value = null;
   inputCardLink.value = null;
@@ -118,47 +95,6 @@ function submitFormHandler (evt){
   // Для каждой карточки создайте экземпляр класса Card.
   const card = new Card(item, '.element-template');
   const cardElement = card.createCard();
-  document.querySelector('.elements').prepend(cardElement); // list
+  list.prepend(cardElement); // list
 })
-/*
-function deleteHandler(e){
-  e.target.closest('.element').remove();
-}
-// Функция установки лайка
- function toggleLike(evt){
-  evt.target.classList.toggle('element__like-button_active');
-} */
 
-/* function createCard(cardData){
-  // склонировать шаблон
-  const cardElement = cardTemplate.cloneNode(true);
-  // заполнить данными
-  const cardImage = cardElement.querySelector('.element__image');
-  const cardTitle = cardElement.querySelector('.element__heading-text');
-  const deleteButton = cardElement.querySelector('.element__delete-button');
-  const likeButton = cardElement.querySelector('.element__like-button');
-
-  cardTitle.textContent = cardData.name;
-  cardImage.style.backgroundImage = `url(${cardData.link})`;
-  // cardImage.src = cardData.link
-  deleteButton.addEventListener('click', deleteHandler);
-  likeButton.addEventListener('click', toggleLike);  // Поставь лайк
-
-  cardImage.addEventListener('click', () => {openModal(imageModal)
-    modalPicture.src = cardData.link;
-    modalCaption.textContent = cardData.name;
-  })
-
-  return cardElement;
-}
-
-function renderCard (){
-  // Заполнение страницы карточками
-  initialCards.forEach(function (card){
-    const el = createCard(card);
-    // вставить на страницу
-    list.prepend(el);
-  })
-}
-renderCard();
-*/

@@ -33,3 +33,7 @@ export const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+
+export const imageModal = document.querySelector('.popup_type_image');  // Окно картинки
+export const modalPicture = imageModal.querySelector('.popup__image');
+export const modalCaption = imageModal.querySelector('.popup__caption');

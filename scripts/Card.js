@@ -1,4 +1,5 @@
-
+import { openModal, escHandler } from './utils.js';
+import { imageModal, modalPicture, modalCaption } from './constants.js';
 
 // Создайте класс Card, который создаёт карточку с текстом и ссылкой на изображение:
 export class Card {
@@ -7,51 +8,45 @@ export class Card {
     this._name = cardData.name;
     this._link = cardData.link;
     this._cardSelector = cardSelector;
+    this._template = document.querySelector(this._cardSelector)
+      .content.querySelector('.element');
   }
   _getTemplate(){
-    const cardElement = document
-    .querySelector(this._cardSelector)  // Шаблон карточки '.element-template'
-    .content
-    .querySelector('.element')
-    .cloneNode(true);
-
-    return cardElement;
+    this._cardElement = this._template.cloneNode(true);
+    this._likeButton = this._cardElement.querySelector('.element__like-button');
+    this._deleteButton = this._cardElement.querySelector('.element__delete-button');
+    this._cardImage = this._cardElement.querySelector('.element__image');
+    this._cardTitle =  this._cardElement.querySelector('.element__heading-text');
+    return this._cardElement;
   }
   // содержит приватные методы, которые работают с разметкой,
   createCard(){
     this._element = this._getTemplate();
-    this._setEventListeners();
-    this._element.querySelector('.element__image').style.backgroundImage =
-    `url(${this._link})`;
-    this._element.querySelector('.element__heading-text').textContent = this._name;
+    this._cardImage.style.backgroundImage = `url(${this._link})`;
+    this._cardTitle.textContent = this._name;
 
+    this._setEventListeners();
     return this._element;
   }
+
   // устанавливают слушателей событий;
   _setEventListeners(){
     // переключение лайка
-    this._element.querySelector('.element__like-button')
-      .addEventListener('click', () => {this._handleLike();
-    });
+    this._likeButton.addEventListener('click', () => {this._handleLike()});
     // удаление карточки
-    this._element.querySelector('.element__delete-button')
-      .addEventListener('click', () => {this._handleDelete();
-    });
+    this._deleteButton.addEventListener('click', () => {this._handleDelete();});
     // открытие изображения
-    this._element.querySelector('.element__image')
-      .addEventListener('click', () => {this._handleOpenModal(imageModal);
-    });
+    this._cardImage.addEventListener('click', () => {this._handleOpenModal(imageModal);});
   }
+
   // содержит приватные методы для каждого обработчика;
   // Обработчик переключения лайка
   _handleLike(){
-    this._element.querySelector('.element__like-button')
-      .classList.toggle('element__like-button_active');
+    this._likeButton.classList.toggle('element__like-button_active');
   }
   // Обработчик удаления карточки
   _handleDelete(){
-    this._element.querySelector('.element__delete-button')
-      .closest('.element').remove();
+    this._cardElement.remove();
   }
   // Обработчик открытия изображения
   _handleOpenModal(modal){
@@ -64,7 +59,7 @@ export class Card {
 }
 
 // содержит один публичный метод, который возвращает полностью работоспособный и
-// наполненный данными элемент карточки.
+// наполненный данными элемент карточки..
 /*  initialCards.forEach((item) => {
   // Для каждой карточки создайте экземпляр класса Card.
   const card = new Card(item, '.element-template');
