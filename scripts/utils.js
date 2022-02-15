@@ -10,8 +10,8 @@ export const closeModal = (modal) => {
 }
 /* Функция закрытия модального окна по клавише "Escape" */
 export const escHandler = (evt) => {
-  const currentForm = document.querySelector('.popup_opened');
   if (evt.key === 'Escape'){
-    closeModal(currentForm);
+    const openedPopup = document.querySelector('.popup_opened');
+    closeModal(openedPopup);
   };
 }

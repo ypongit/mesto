@@ -50,11 +50,10 @@ export class Card {
   }
   // Обработчик открытия изображения
   _handleOpenModal(modal){
-    modal.classList.add('popup_opened');
+    openModal(modal);
     modalPicture.src = this._link;
+    modalPicture.alt = this._name;
     modalCaption.textContent = this._name;
-    document.addEventListener('keydown', escHandler); // слушатель ESC - добавление
-
   }
 }
 

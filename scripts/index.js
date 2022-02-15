@@ -66,35 +66,39 @@ const closeModalOnOverlayClick = () => {
 };
 closeModalOnOverlayClick ();
 
+// Функция создания карточки
+function createCard(item) {
+// Для каждой карточки создайте экземпляр класса Card.
+  const card = new Card(item, '.element-template');
+  const cardElement = card.createCard();
+  return cardElement;
+}
+
+// Вставка карточки на страницу через форму добавления
 mainAddForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const item = {
     name: inputCardName.value,
     link: inputCardLink.value
   }
-  const card = new Card(item, '.element-template');
-  const cardElement = card.createCard();
-
+  const cardElement = createCard(item);
   list.prepend(cardElement);
 
   closeModal(addForm);
-  inputCardName.value = null;
-  inputCardLink.value = null;
-
+  mainAddForm.reset();
 })
-
-mainEditForm.addEventListener('submit', submitFormHandler);
+// Форма редактирования профиля (class="profile")
+mainEditForm.addEventListener('submit', handleProfileFormSubmit);
 // Обработчик «отправки» формы
-function submitFormHandler (evt){
+function handleProfileFormSubmit (evt){
   evt.preventDefault();
   profileTitle.textContent = inputProfileName.value;
   profileDescription.textContent = inputProfileDescription.value;
   closeModal(editForm);
 }
+// Заполнение страницы карточками
  initialCards.forEach((item) => {
-  // Для каждой карточки создайте экземпляр класса Card.
-  const card = new Card(item, '.element-template');
-  const cardElement = card.createCard();
-  list.prepend(cardElement); // list
+  const cardElement = createCard(item);
+  list.prepend(cardElement);
 })
 

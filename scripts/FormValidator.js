@@ -56,11 +56,11 @@ _enableSubmitButton = () => {
   this._buttonElement.disabled = false;
 }
 // изменяют состояние кнопки сабмита, устанавливают все обработчики;
-_toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
+_toggleButtonState = () => {
   if(this._hasInvalidInput()){
     this._disableSubmitButton();
   } else {
-    this._enableSubmitButton(buttonElement, inactiveButtonClass);
+    this._enableSubmitButton();
   }
 };
 
