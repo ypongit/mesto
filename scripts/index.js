@@ -31,14 +31,31 @@ const inputProfileDescription = document.querySelector('.popup__field_el_descrip
 // Для каждой проверяемой формы создайте экземпляр класса FormValidator.
 const editFormValidator = new FormValidator(validationConfig, mainEditForm);
 const addFormValidator = new FormValidator(validationConfig, mainAddForm);
+/* const formValidators = {};
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(formElement, config);
+    // получаем данные из атрибута `name` у формы
+    const formName = formElement.getAttribute('name');
 
+    // записываем в объект под именем формы
+    formValidators[formName] =validator;
+    validator.enableValidation();
+  })
+} */
+// Включение валидации
+// enableValidation(validationConfig);
 // Запуск функции валидации для каждой из форм.
-editFormValidator.enableValidation();
-addFormValidator.enableValidation();
+ editFormValidator.enableValidation();
+ addFormValidator.enableValidation();
+
 
 // Показ, скрытие формы редактирования
 editFormButton.addEventListener('click', () => {
   openModal(editForm);
+  editFormValidator.resetValidation();
+  // formValidators['mainEditForm'].resetValidation();
   inputProfileName.value = profileTitle.textContent;
   inputProfileDescription.value = profileDescription.textContent;
 } );
@@ -96,6 +113,15 @@ function handleProfileFormSubmit (evt){
   profileDescription.textContent = inputProfileDescription.value;
   closeModal(editForm);
 }
+/*
+// сделать отдельную функцию под названием handleCardClick в index.js -
+// она будет получать на вход данные карточки:
+ const handleCardClick = (name, link) => {
+  modalPicture.src = link;
+  modalPicture.alt = name;
+  modalCaption.textContent = name;
+  openModal(imageModal);
+}*/
 // Заполнение страницы карточками
  initialCards.forEach((item) => {
   const cardElement = createCard(item);

@@ -38,7 +38,13 @@ _checkInputValidity = (inputElement) => {
     this._hideInputError(inputElement);
   }
 };
-
+// метод для очистки ошибок и управления кнопкой
+resetValidation() {
+  this._toggleButtonState();
+  this._inputList.forEach((inputElement) => {
+  this._hideInputError(inputElement);
+  })
+}
 _hasInvalidInput = () => {
   return this._inputList.some((inputElement) => {
     return !inputElement.validity.valid;
