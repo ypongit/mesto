@@ -1,16 +1,16 @@
 import { openModal, escHandler } from './utils.js';
 import { imageModal, modalPicture, modalCaption } from './constants.js';
 
-// Создайте класс Card, который создаёт карточку с текстом и ссылкой на изображение:
+// класс Card создаёт карточку с текстом и ссылкой на изображение:
 export class Card {
-  // принимает в конструктор её данные и селектор её template-элемента (, handleCardClick)
-  constructor(cardData, cardSelector){
+  // принимает в конструктор её данные и селектор её template-элемента ()
+  constructor(cardData, cardSelector, handleCardClick){
     this._name = cardData.name;
     this._link = cardData.link;
     this._cardSelector = cardSelector;
     this._template = document.querySelector(this._cardSelector)
       .content.querySelector('.element');
-    // this._handleCardClick = handleCardClick;
+    this._handleCardClick = handleCardClick;
   }
   _getTemplate(){
     this._cardElement = this._template.cloneNode(true);
@@ -20,7 +20,7 @@ export class Card {
     this._cardTitle =  this._cardElement.querySelector('.element__heading-text');
     return this._cardElement;
   }
-  // содержит приватные методы, которые работают с разметкой,
+  // приватные методы, которые работают с разметкой,
   createCard(){
     this._element = this._getTemplate();
     this._cardImage.style.backgroundImage = `url(${this._link})`;
@@ -39,14 +39,10 @@ export class Card {
     this._deleteButton.addEventListener('click', () => {this._handleDelete();
     });
     // открытие изображения
-    this._cardImage.addEventListener('click', () => {this._handleOpenModal(imageModal)
-    });
-    /*
-    // Не работает эта хрень. (Card.js:45 Uncaught TypeError: this._handleCardClick is not a function
-    at HTMLDivElement.<anonymous> (Card.js:45:12))
+    // this._cardImage.addEventListener('click', () => {this._handleOpenModal(imageModal)});
     this._cardImage.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link)
-    }); */
+    });
   }
 
   // содержит приватные методы для каждого обработчика;

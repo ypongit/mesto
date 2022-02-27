@@ -86,7 +86,7 @@ closeModalOnOverlayClick ();
 // Функция создания карточки
 function createCard(item) {
 // Для каждой карточки создайте экземпляр класса Card.
-  const card = new Card(item, '.element-template');
+  const card = new Card(item, '.element-template', handleCardClick);
   const cardElement = card.createCard();
   return cardElement;
 }
@@ -113,15 +113,14 @@ function handleProfileFormSubmit (evt){
   profileDescription.textContent = inputProfileDescription.value;
   closeModal(editForm);
 }
-/*
 // сделать отдельную функцию под названием handleCardClick в index.js -
 // она будет получать на вход данные карточки:
- const handleCardClick = (name, link) => {
+const handleCardClick = (name, link) => {
   modalPicture.src = link;
   modalPicture.alt = name;
   modalCaption.textContent = name;
   openModal(imageModal);
-}*/
+}
 // Заполнение страницы карточками
  initialCards.forEach((item) => {
   const cardElement = createCard(item);
