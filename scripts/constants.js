@@ -1,7 +1,7 @@
 export const validationConfig = {
-  formSelector: '.popup__main-container',
-  inputSelector: '.popup__field',
-  submitButtonSelector: '.popup__submit',
+  formSelector: '.popup__main-container', // форма
+  inputSelector: '.popup__field', // поля ввода
+  submitButtonSelector: '.popup__submit', // кнопка отправки данных
   inactiveButtonClass: 'popup__submit_inactive',
   inputErrorClass: 'popup__field_type_error',
   errorClass: 'popup__field_error_active'
@@ -37,3 +37,4 @@ export const initialCards = [
 export const imageModal = document.querySelector('.popup_type_image');  // Окно картинки
 export const modalPicture = imageModal.querySelector('.popup__image');
 export const modalCaption = imageModal.querySelector('.popup__caption');
+export const cardListSelector = document.querySelector('.elements'); // контейнер для добавления карточек
