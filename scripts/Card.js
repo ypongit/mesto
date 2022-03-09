@@ -1,15 +1,19 @@
-import { openModal, escHandler } from './utils.js';
-import { imageModal, modalPicture, modalCaption } from './constants.js';
+// import { openModal, escHandler } from './utils.js';
+// import { imageModal, modalPicture, modalCaption } from '../utils/constants.js';
+// import PopupWithImage from '../components/PopupWithImage.js';
 
 // класс Card создаёт карточку с текстом и ссылкой на изображение:
 export class Card {
   // принимает в конструктор её данные и селектор её template-элемента ()
-  constructor(cardData, cardSelector){
-    this._name = cardData.name;
-    this._link = cardData.link;
+  constructor(cardData, cardSelector, handleCardClick){
+    // this._name = cardData.name;
+    this._name = cardData.card_name;
+    // this._link = cardData.link;
+    this._link = cardData.image_link;
     this._cardSelector = cardSelector;
     this._template = document.querySelector(this._cardSelector)
       .content.querySelector('.element');
+    this._handleCardClick = handleCardClick;
   }
   _getTemplate(){
     this._cardElement = this._template.cloneNode(true);
@@ -24,7 +28,6 @@ export class Card {
     this._element = this._getTemplate();
     this._cardImage.style.backgroundImage = `url(${this._link})`;
     this._cardTitle.textContent = this._name;
-
     this._setEventListeners();
     return this._element;
   }
@@ -38,10 +41,9 @@ export class Card {
     this._deleteButton.addEventListener('click', () => {this._handleDelete();
     });
     // открытие изображения
-    this._cardImage.addEventListener('click', () => {this._handleOpenModal(imageModal)});
-    /* this._cardImage.addEventListener('click', () => {
-      this._handleCardClick(this._name, this._link)
-    }); */
+    this._cardImage.addEventListener('click', () => {
+      this._handleCardClick(this._name, this._link);
+    });
   }
 
   // содержит приватные методы для каждого обработчика;
@@ -54,11 +56,11 @@ export class Card {
     this._cardElement.remove();
   }
   // Обработчик открытия изображения
-  _handleOpenModal(modal){
+  /* _handleOpenModal(modal){
     openModal(modal);
     modalPicture.src = this._link;
     modalPicture.alt = this._name;
     modalCaption.textContent = this._name;
-  }
+  } */
 }
 
