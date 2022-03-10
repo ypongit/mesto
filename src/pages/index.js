@@ -19,6 +19,7 @@ import Popup from '../components/Popup.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
+import './index.css';
 // поля ввода
 const inputProfileName = document.querySelector('.popup__field_el_name');
 const inputProfileDescription = document.querySelector('.popup__field_el_description');

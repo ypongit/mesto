@@ -8,18 +8,17 @@
   <meta name="keywords" content="путешествия, Россия, места, Эльбрус, Домбай, Карачаево-Черкессия, Карачаевск">
   <meta name="author" content="Юрий Пономарев">
   <title>Место Россия</title>
-  <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body>
   <div class="page">
     <header class="header">
-      <img src="./images/logo.svg" alt="Логотип" class="logo">
+      <img src="<%=require('./images/logo.svg')%>" alt="Логотип" class="logo">
     </header>
     <main class="content">
       <section class="profile">
         <div class="profile__data">
-          <img src="./images/kusto.jpg" alt="фотография" class="profile__avatar">
+          <img src="<%=require('./images/kusto.jpg')%> " alt="фотография" class="profile__avatar">
           <div class="profile__info">
             <div class="profile__edit">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -97,7 +96,7 @@
     </article>
   </template>
 
-  <script type="module" src="./pages/index.js"></script>
+
 </body>
 
 </html>
