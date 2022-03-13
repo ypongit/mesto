@@ -1,7 +1,3 @@
-// import { openModal, escHandler } from './utils.js';
-// import { imageModal, modalPicture, modalCaption } from '../utils/constants.js';
-// import PopupWithImage from '../components/PopupWithImage.js';
-
 // класс Card создаёт карточку с текстом и ссылкой на изображение:
 export class Card {
   // принимает в конструктор её данные и селектор её template-элемента ()
@@ -24,7 +20,7 @@ export class Card {
     return this._cardElement;
   }
   // Функция создания карточки
-  createCard(){
+  getView(){
     this._element = this._getTemplate();
     this._cardImage.style.backgroundImage = `url(${this._link})`;
     this._cardTitle.textContent = this._name;

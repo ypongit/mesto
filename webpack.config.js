@@ -1,6 +1,6 @@
 const path = require('path'); // подключаем path к конфигу вебпак
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // подключите плагин
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // module.exports — это синтаксис экспорта в Node.js
 module.exports = {
@@ -65,7 +65,7 @@ module.exports = {
     new HtmlWebpackPlugin({
     template: './src/index.html' // путь к файлу index.html
   }),
-  new CleanWebpackPlugin(), // использовали плагин
+  // new CleanWebpackPlugin(), // использовали плагин
   new MiniCssExtractPlugin() // подключение плагина для объединения файлов
   ] // добавьте массив
 };

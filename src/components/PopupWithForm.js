@@ -7,10 +7,11 @@ constructor ({popupSelector, handleFormSubmit}){
   super(popupSelector);
   this._handleFormSubmit = handleFormSubmit;
   this._form = this._popup.querySelector('.popup__main-container');
+  this._inputList = Array.from(this._form.querySelectorAll('.popup__field'));
 }
 // Содержит приватный метод _getInputValues, который собирает данные всех полей формы.
 _getInputValues(){
-  this._inputList = Array.from(this._form.querySelectorAll('.popup__field'));
+  // this._inputList = Array.from(this._form.querySelectorAll('.popup__field'));
   this._formValues = {};
   this._inputList.forEach(input => {
     this._formValues[input.name] = input.value;
@@ -28,7 +29,8 @@ setEventListeners(){
     // console.log('getInputValues result: ', this._getInputValues());
     this._handleFormSubmit(this._getInputValues());
     this.close();
-  }, {once: true});
+    }
+  );
 }
 // Перезаписывает родительский метод close, так как при закрытии попапа форма должна ещё и сбрасываться.
 close(){
