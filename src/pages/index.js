@@ -47,7 +47,7 @@ defaultCardList.renderItems();
 // Форма добавления карточки addForm = document.querySelector('.popup_type_add-card');
 const addFormPopup = new PopupWithForm({popupSelector: '.popup_type_add-card',
   handleFormSubmit: (item) => {
-  const cardElement = createCard(item, '.element-template', handleCardClick);
+  const cardElement = createCard(item);
   defaultCardList.addItem(cardElement);
   }
 });
