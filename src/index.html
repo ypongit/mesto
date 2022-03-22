@@ -18,7 +18,10 @@
     <main class="content">
       <section class="profile">
         <div class="profile__data">
-          <img src="<%=require('./images/kusto.jpg')%> " alt="фотография" class="profile__avatar">
+          <div class="profile__avatar">
+            <!-- <img src="<%=require('./images/kusto.jpg')%> " alt="фотография" class="profile__avatar"> -->
+          </div>
+
           <div class="profile__info">
             <div class="profile__edit">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -46,11 +49,11 @@
       <h2 class="popup__heading">Редактировать профиль</h2>
         <form class="popup__main-container" name="profile_edit" novalidate>
           <label for="el-name-input" class="popup__field-wrapper">
-            <input type="text" name="el_name" id="el-name-input" class="popup__field popup__field_el_name" placeholder="Имя" required minlength="2" maxlength="40">
+            <input type="text" name="name" id="el-name-input" class="popup__field popup__field_el_name" placeholder="Имя" required minlength="2" maxlength="40">
             <span class="el-name-input-error popup__field-error"></span>
           </label>
           <label for="el-description-input" class="popup__field-wrapper">
-            <input type="text" name="el_description" id="el-description-input" class="popup__field popup__field_el_description" placeholder="О себе" required minlength="2" maxlength="200">
+            <input type="text" name="description" id="el-description-input" class="popup__field popup__field_el_description" placeholder="О себе" required minlength="2" maxlength="200">
             <span class="el-description-input-error popup__field-error"> </span>
           </label>
           <button type="submit" class="popup__submit">Сохранить</button>
@@ -64,14 +67,38 @@
       <h2 class="popup__heading">Новое место</h2>
         <form class="popup__main-container" name="card_add" novalidate>
           <label for="card-name-input" class="popup__field-wrapper">
-            <input type="text" name="card_name" id="card-name-input" class="popup__field popup__field_card_name" placeholder="Название" required minlength="2" maxlength="30">
+            <input type="text" name="name" id="card-name-input" class="popup__field popup__field_card_name" placeholder="Название" required minlength="2" maxlength="30">
             <span class="popup__field-error card-name-input-error"></span>
           </label>
           <label for="image-link-input" class="popup__field-wrapper">
-            <input type="url" name="image_link" id="image-link-input" class="popup__field popup__field_card_link" placeholder="Ссылка на картинку" required>
+            <input type="url" name="link" id="image-link-input" class="popup__field popup__field_card_link" placeholder="Ссылка на картинку" required>
             <span class="popup__field-error image-link-input-error"></span>
           </label>
           <button type="submit" class="popup__submit">Создать</button>
+        </form>
+    </div>
+  </div>
+  <!-- Форма удаления карточки -->
+  <div class="popup popup_type_delete-confirm">
+    <div class="popup__container popup__container_type_delete-confirm">
+      <button type="button" class="popup__close"></button>
+      <h2 class="popup__heading">Вы уверены?</h2>
+        <form class="popup__main-container" name="card_delete" novalidate>
+          <button type="submit" class="popup__submit popup__submit_type_delete-confirm">Да</button>
+        </form>
+    </div>
+  </div>
+  <!-- Форма обновления аватара -->
+  <div class="popup popup_type_avatar">
+    <div class="popup__container popup__container_avatar">
+      <button type="button" class="popup__close"></button>
+      <h2 class="popup__heading">Обновить аватар</h2>
+        <form class="popup__main-container" name="avatar_update" novalidate>
+          <label for="image-link-input" class="popup__field-wrapper">
+            <input type="url" name="link" id="image-link-input" class="popup__field popup__field_card_link" placeholder="Ссылка аватар required>
+            <span class="popup__field-error image-link-input-error"></span>
+          </label>
+          <button type="submit" class="popup__submit popup__submit_avatar">Сохранить</button>
         </form>
     </div>
   </div>
@@ -92,6 +119,7 @@
       <div class="element__heading">
         <h2 class="element__heading-text"></h2>
         <button type="button" class="element__like-button"></button>
+        <span class="card__like-count"></span>
       </div>
     </article>
   </template>

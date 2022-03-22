@@ -19,6 +19,9 @@ _getInputValues(){
   return this._formValues;
 }
 
+changeSubmitHandler(newSubmitHandler){
+  this._handleFormSubmit = newSubmitHandler;
+}
 // Перезаписывает родительский метод setEventListeners.
 // Метод setEventListeners класса PopupWithForm должен не только добавлять обработчик клика иконке закрытия,
 // но и добавлять обработчик сабмита формы.

@@ -8,7 +8,10 @@ import {mainEditForm,
         addForm,
         addCardButton,
         editFormSelector,
-        editFormButton} from '../utils/constants.js';
+        editFormButton,
+        avatarImg,
+        submitButton
+      } from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 // import { /* openModal, closeModal, */ escHandler } from '../scripts/utils.js';
 import Section from '../components/Section.js';
@@ -16,13 +19,73 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
 import './index.css';
+import { api } from '../components/Api.js';
 // поля ввода
 const inputProfileName = document.querySelector('.popup__field_el_name');
 const inputProfileDescription = document.querySelector('.popup__field_el_description');
+// информация о пользователе
+const user = new UserInfo ({userNameSelector: '.profile__title', userInfoSelector: '.profile__text'});
+// Загрузка информации о пользователе с сервера
+let userId;
+api.getProfile()
+  .then(res => {
+    // console.log('Ответ getProfile res: ', res);
+    user.setUserInfo(res.name, res.about)
+    userId = res._id;
+  })
+
+api.getCards()
+  .then(cardList => {
+    // console.log('cardList -> ', cardList);
+    cardList.forEach(data => {
+      const card = createCard({
+        name: data.name,
+        link: data.link,
+        likes: data.likes,
+        id: data._id,
+        userId: userId,
+        ownerId: data.owner._id
+      })
+      // console.log('card ->', card)
+      defaultCardList.addItem(card)
+    })
+  })
 // экземпляр карточки
 const createCard = (data) => {
-  const card = new Card(data, '.element-template', handleCardClick)
+  const card = new Card(
+    data,
+    '.element-template',
+    handleCardClick,
+    (id) => {
+      // console.log('id', id)
+      confirmPopup.open();
+      confirmPopup.changeSubmitHandler(() => {
+        // console.log(id)
+        api.deleteCard(id)
+          .then(res => {
+            card.deleteCard();
+            // console.log(res);
+          })
+      })
+    },
+    (id) => {
+      if(card.isLiked()){
+         api.deleteLike(id)
+        .then(res =>{
+          card.setLikes(res.likes)
+      })
+      } else {
+        api.addLike(id)
+        .then(res =>{
+          card.setLikes(res.likes)
+      })
+      }
+    },
+    );
   return card.getView();
+}
+function handleCardClick(name, link){
+  imageModalPopup.open(name, link);
 }
 // вставка карточки на страницу
 const renderCard = (data, wrap) => {
@@ -33,33 +96,84 @@ const renderCard = (data, wrap) => {
 // Создание карточек для начального заполнения страницы
 const defaultCardList = new Section({items: initialCards, renderer: renderCard
 }, '.elements');  // cardListSelector = document.querySelector('.elements')
+// Заполняем страницу
+defaultCardList.renderItems();
 
 // экземпляры классов
 // Форма редактирования профиля:  editFormSelector = document.querySelector('.popup_type_edit')
 const editFormPopup = new PopupWithForm({popupSelector: '.popup_type_edit',
   handleFormSubmit: (item) => {
-    user.setUserInfo(item);
+    renderLoading(true);
+    const {name, description} = item;
+    // console.log("name", name, "description", description);
+
+    api.editProfile(name, description)
+    .then(res => {
+      user.setUserInfo(item);
+    })
+    .finally(() => {
+      renderLoading(false);
+    })
   }
 });
-// Заполняем страницу
-defaultCardList.renderItems();
-
+// Форма редактирования аватара
+const avatarFormPopup = new PopupWithForm({popupSelector: '.popup_type_avatar',
+  handleFormSubmit: (item) => {
+    renderLoading(true);
+    api.setAvatar(item.link)
+    // console.log('Avatar item => ', item.link)
+    .then((res) => {
+      console.log('res index.js -> ', res)
+     //avatarImg.src = `${res.avatar}`;
+     avatarImg.style.backgroundImage = `url(${res.avatar})`;
+     avatarImg.alt = res.name;
+    })
+    .catch((err) => {
+      console.log(`${err}`);
+      }
+    )
+    .finally(() => {
+      renderLoading(false);
+    })
+  }
+})
+avatarFormPopup.setEventListeners();
+avatarImg.addEventListener('click', () => {
+  avatarFormPopup.open();
+})
 // Форма добавления карточки addForm = document.querySelector('.popup_type_add-card');
 const addFormPopup = new PopupWithForm({popupSelector: '.popup_type_add-card',
   handleFormSubmit: (item) => {
-  const cardElement = createCard(item);
-  defaultCardList.addItem(cardElement);
+   renderLoading(true);
+    api.addCard(item['name'], item.link)
+      .then(res => {
+        const cardElement = createCard(
+          {
+          name: res.name,
+          link: res.link,
+          likes: res.likes,
+          id: res._id,
+          ownerId: res.owner._id
+        })
+        defaultCardList.addItem(cardElement);
+      })
+      .finally(() => {
+        renderLoading(false);
+      })
   }
 });
 addFormPopup.setEventListeners();
+// Форма подтверждения удаления карточки
+const confirmPopup = new PopupWithForm({popupSelector: '.popup_type_delete-confirm'}) // {popupSelector: '.popup_type_delete-confirm'}
+
+confirmPopup.setEventListeners();
 
 // Открытие формы добавления
 addCardButton.addEventListener('click', () => {
   addFormPopup.open();
 });
 
-// информация о пользователе
-const user = new UserInfo ({userNameSelector: '.profile__title', userInfoSelector: '.profile__text'});
+
 // Показ, скрытие формы редактирования
 editFormButton.addEventListener('click', () => {
   const userData = user.getUserInfo();
@@ -72,20 +186,30 @@ editFormButton.addEventListener('click', () => {
 editFormPopup.setEventListeners();
 // показ изображения
 const imageModalPopup = new PopupWithImage('.popup_type_image');
-function handleCardClick(name, link){
-  imageModalPopup.open(name, link);
-}
 imageModalPopup.setEventListeners();
+// отображение загрузки
+function renderLoading(isLoading){
+  if (isLoading){
+    Array.from(submitButton).forEach((submit) => {
+      submit.value = "Сохранение..."
+    }
+    )
+  } else {
+    Array.from(submitButton).forEach((submit) => {
+      submit.value = "Сохранить";
+    })
+  }
+}
 
 // Поля ввода
 // const inputCardName = document.querySelector('.popup__field_card_name');
 // const inputCardLink = document.querySelector('.popup__field_card_link');
 
 // Для каждой проверяемой формы создайте экземпляр класса FormValidator.
-const formValidators = {}
+/*const formValidators = {}
 
 // Включение валидации
-const enableValidation = (config) => {
+ const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector))
   formList.forEach((formElement) => {
     const validator = new FormValidator(config, formElement);
@@ -97,11 +221,12 @@ const enableValidation = (config) => {
   });
 }
 enableValidation(validationConfig);
+formValidators['card_delete'].resetValidation(); */
 
-// const editFormValidator = new FormValidator(validationConfig, mainEditForm);
-// const addFormValidator = new FormValidator(validationConfig, mainAddForm);
+const editFormValidator = new FormValidator(validationConfig, mainEditForm);
+const addFormValidator = new FormValidator(validationConfig, mainAddForm);
 // Запуск функции валидации для каждой из форм.
-//  editFormValidator.enableValidation();
-//  addFormValidator.enableValidation();
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
 
 

@@ -8,30 +8,30 @@ export const validationConfig = {
 }
 // Массив информации для карточек
 export const initialCards = [
-  {
-    card_name: 'Архыз',
-    image_link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  /* {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
   },
   {
-    card_name: 'Челябинская область',
-    image_link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
   },
   {
-    card_name: 'Иваново',
-    image_link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
   },
   {
-    card_name: 'Камчатка',
-    image_link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
   },
   {
-    card_name: 'Холмогорский район',
-    image_link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
   },
   {
-    card_name: 'Байкал',
-    image_link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  } */
 ];
 
 // Модальные окна
@@ -56,3 +56,6 @@ export const cardListSelector = document.querySelector('.elements'); // конт
 export const imageModalCloseButton = imageModal.querySelector('.popup__close');
 export const addCardButton = document.querySelector('.profile__add-button'); // Кнопка добавления карточки
 export const editFormButton = document.querySelector('.profile__edit-button'); //Кнопка открытия формы редактирования
+export const submitButton = document.querySelector('.popup__submit');
+export const avatarImg = document.querySelector('.profile__avatar');
+
