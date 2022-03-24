@@ -96,7 +96,7 @@
         <form class="popup__main-container" name="avatar_update" novalidate>
           <label for="image-link-input" class="popup__field-wrapper">
             <input type="url" name="link" id="avatar-link-input" class="popup__field popup__field_card_link" placeholder="Ссылка аватар" required>
-            <span class="popup__field-error image-link-input-error"></span>
+            <span class="popup__field-error avatar-link-input-error"></span>
           </label>
           <button type="submit" class="popup__submit popup__submit_avatar">Сохранить</button>
         </form>
@@ -118,8 +118,11 @@
       <!--img src="./images/karachaevsk.jpg" alt="фото места" class="element__image"-->
       <div class="element__heading">
         <h2 class="element__heading-text"></h2>
-        <button type="button" class="element__like-button"></button>
-        <span class="card__like-count"></span>
+        <div class="element__like-wrap">
+          <button type="button" class="element__like-button"></button>
+          <span class="element__like-count"></span>
+        </div>
+
       </div>
     </article>
   </template>

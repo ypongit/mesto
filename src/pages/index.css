@@ -45,3 +45,5 @@
 @import url("../blocks/popup/__submit/popup__submit_avatar.css");
 @import url("../blocks/popup/__container/popup__container_type_delete-confirm.css");
 @import url("../blocks/popup/__submit/popup__submit_type_delete-confirm.css");
+@import url("../blocks/element/__like-wrap/element__like-wrap.css");
+@import url("../blocks/element/__like-count/element__like-count.css");

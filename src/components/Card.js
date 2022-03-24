@@ -29,7 +29,7 @@ export class Card {
 // подсчет количества лайков
   setLikes(newLikes){
     this._likes = newLikes;
-    const likeCountElement = this._element.querySelector('.card__like-count');
+    const likeCountElement = this._element.querySelector('.element__like-count');
     likeCountElement.textContent = this._likes.length; //
 
     // const userHasLikedCard = this._likes.find(user => user._id == this._userId);
