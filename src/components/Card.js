@@ -85,20 +85,13 @@ export class Card {
 
   isLiked(){
     const userHasLikedCard = this._likes.find(user => user._id == this._userId);
-
-    return userHasLikedCard
+    return userHasLikedCard;
   }
 
   // Обработчик удаления карточки
   deleteCard(){
     this._cardElement.remove();
+    this._cardElement = null;
   }
-  // Обработчик открытия изображения
-  /* _handleOpenModal(modal){
-    openModal(modal);
-    modalPicture.src = this._link;
-    modalPicture.alt = this._name;
-    modalCaption.textContent = this._name;
-  } */
 }
 

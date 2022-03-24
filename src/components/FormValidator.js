@@ -82,11 +82,11 @@ _setEventListeners = () => {
 // имеет публичный метод enableValidation, который включает валидацию формы.
 enableValidation (){
     this._form.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-      this._disableSubmitButton();
+    this._disableSubmitButton();
   });
     this._disableSubmitButton();
     this._setEventListeners();
   }
+
 }
 

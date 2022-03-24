@@ -10,10 +10,6 @@ class Api {
       headers: this._headers
     })
     .then(res => res.ok ? res.json() : Promise.reject(res.status))
-    .catch(console.log)
-    /* .then(res => {
-      console.log('res', res);
-    } )*/
 
   }
 // загрузка карточек
@@ -23,8 +19,6 @@ class Api {
       headers: this._headers
     })
     .then(res => res.ok ? res.json() : Promise.reject(res.status))
-
-    .catch(console.log)
   }
 // изменение данных профиля на сервере
   editProfile(name, about) {
@@ -38,7 +32,6 @@ class Api {
       })
     })
     .then(res => res.ok ? res.json() : Promise.reject(res.status))
-    .catch(console.log)
   }
 // Добавление новой карточки
 addCard(name, link) {
@@ -52,7 +45,6 @@ addCard(name, link) {
     })
   })
   .then(res => res.ok ? res.json() : Promise.reject(res.status))
-  .catch(console.log)
 }
 // удаление новой карточки
 deleteCard(id) {
@@ -62,7 +54,6 @@ deleteCard(id) {
     headers: this._headers
   })
   .then(res => res.ok ? res.json() : Promise.reject(res.status))
-  .catch(console.log)
 }
 // удаление лайка
 deleteLike(id) {
@@ -72,7 +63,6 @@ deleteLike(id) {
     headers: this._headers
   })
   .then(res => res.ok ? res.json() : Promise.reject(res.status))
-  .catch(console.log)
 }
 // добавление лайка
 addLike(id) {
@@ -82,7 +72,6 @@ addLike(id) {
     headers: this._headers
   })
   .then(res => res.ok ? res.json() : Promise.reject(res.status))
-  .catch(console.log)
 }
 // установка аватара
 setAvatar(avatar) {
@@ -96,11 +85,6 @@ setAvatar(avatar) {
     })
   })
   .then(res => res.ok ? res.json() : Promise.reject(res.status))
-  // .then(res => res.ok ? res.json() : Promise.reject(res.status))
-  .catch(console.log)
- /*  .then(res => {
-    console.log('res', res);
-  } ) */
 }
   // другие методы работы с API
 }
