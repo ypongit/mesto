@@ -29,7 +29,6 @@ const user = new UserInfo ({userNameSelector: '.profile__title', userInfoSelecto
 let userId;
 api.getProfile()
   .then(res => {
-    // console.log('Ответ getProfile res: ', res);
     user.setUserInfo(res.name, res.about);
     user.setUserAvatar(res.avatar); // установка аватара загрузкой с сервера
     userId = res._id;
@@ -41,7 +40,6 @@ api.getProfile()
 
 api.getCards()
   .then(cardList => {
-    // console.log('cardList -> ', cardList);
     cardList.forEach(data => {
       const card = createCard({
         name: data.name,
@@ -51,7 +49,6 @@ api.getCards()
         userId: userId,
         ownerId: data.owner._id
       })
-      // console.log('card ->', card)
       defaultCardList.addItem(card)
     })
   })
@@ -66,14 +63,11 @@ const createCard = (data) => {
     '.element-template',
     handleCardClick,
     (id) => {
-      // console.log('id', id)
       confirmPopup.open();
       confirmPopup.changeSubmitHandler(() => {
-        // console.log(id)
         api.deleteCard(id)
           .then(res => {
             card.deleteCard();
-            // console.log(res);
             confirmPopup.close();
           })
           .catch((err) => {
@@ -120,9 +114,7 @@ defaultCardList.renderItems();
 // экземпляры классов
 // Форма редактирования профиля:  editFormSelector = document.querySelector('.popup_type_edit')
 const editFormPopup = new PopupWithForm({popupSelector: '.popup_type_edit',
- //  handleFormSubmit: (item) => {
   handleFormSubmit: (evt, item) => {
-     // console.log ('item', item);
     renderLoading(true, evt);
     const {name, description} = item;
     api.editProfile(name, description)
@@ -144,9 +136,7 @@ const avatarFormPopup = new PopupWithForm({popupSelector: '.popup_type_avatar',
   handleFormSubmit: (evt, item) => {
     renderLoading(true, evt);
     api.setAvatar(item.link)
-    // console.log('Avatar item => ', item.link)
     .then((res) => {
-      // console.log('res index.js -> ', res)
      //avatarImg.src = `${res.avatar}`;
      // avatarImg.style.backgroundImage = `url(${res.avatar})`;
      user.setUserAvatar(res.avatar);  // установка URL аватара через форму
@@ -221,13 +211,11 @@ imageModalPopup.setEventListeners();
 // отображение загрузки
 function renderLoading(isLoading, evt){
   if (isLoading){
-    console.log('renderLoading submitter ->', evt);
     evt.submitter.textContent = "Сохранение..."
     // Array.from(submitButton).forEach((submit) => {
     //   submit.value = "Сохранение..."
     // })
  } else {
-    // console.log(evt);
     evt.submitter.textContent = "Сохранить";
     //  Array.from(submitButton).forEach((submit) => {
     //   submit.value = "Сохранить";

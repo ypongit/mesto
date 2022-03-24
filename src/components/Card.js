@@ -7,11 +7,9 @@ export class Card {
     this._link = cardData.link;
     // this._link = cardData.image_link;
     this._likes = cardData.likes;
-    // console.log('this._likes ->', this._likes.length)
     this._id = cardData.id;
     this._userId = cardData.userId;
     this._ownerId = cardData.ownerId;
-    // console.log('this._id ->', this._id)
     this._cardSelector = cardSelector;
     this._template = document.querySelector(this._cardSelector)
       .content.querySelector('.element');

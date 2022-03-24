@@ -21,13 +21,11 @@ _getInputValues(){
 }
 renderLoading(isLoading, evt){
   if (isLoading){
-    console.log('renderLoading submitter ->', evt);
     evt.submitter.textContent = "Сохранение..."
     // Array.from(submitButton).forEach((submit) => {
     //   submit.value = "Сохранение..."
     // })
  } else {
-    console.log(evt);
     evt.submitter.textContent = "Сохранить";
     //  Array.from(submitButton).forEach((submit) => {
     //   submit.value = "Сохранить";
@@ -44,15 +42,8 @@ setEventListeners(){
   super.setEventListeners();
   this._form.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    //this.renderLoading(true, evt);
-    /* const renderEvt = evt;
-    return renderEvt; */
-    // console.log('Submit event ->', evt.submitter)
 
-    // console.log('getInputValues result: ', this._getInputValues());
     this._handleFormSubmit(evt, this._getInputValues());
-    // this.close();
-    // this.renderLoading(false, evt);
     }
 
   );

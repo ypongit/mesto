@@ -76,7 +76,6 @@ addLike(id) {
 // установка аватара
 setAvatar(avatar) {
   // ...
-  console.log('setAvatar ->', avatar)
   return fetch(`${this._baseUrl}/users/me/avatar `, {
     method: "PATCH",
     headers: this._headers,
