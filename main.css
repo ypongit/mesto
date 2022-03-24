@@ -6,7 +6,7 @@
 .content{margin:0 auto;max-width:880px}@media screen and (max-width:960px){.content{max-width:720px}}@media screen and (max-width:768px){.content{max-width:480px}}@media screen and (max-width:540px){.content{max-width:320px}}
 .profile{align-items:center;display:flex;justify-content:space-between;margin:40px auto 0}@media screen and (max-width:768px){.profile{flex-direction:column}}@media screen and (max-width:540px){.profile{max-width:282px}}
 .profile__info{margin-left:30px;width:336px}@media screen and (max-width:540px){.profile__info{margin-top:26px;max-width:282px}}
-.profile__avatar{background-image:url(images/kusto.86c34fe8a5174a661498.jpg);background-repeat:no-repeat;background-size:cover;border-radius:50%;height:120px;width:120px}.profile__avatar:before{content:"";height:120px;position:absolute;transition:.3s;width:120px}.profile__avatar:hover:before{background:#000c;background-image:url(images/pensil.ae1a976ddb506239e9f0.svg);background-position:50%;background-repeat:no-repeat}@media screen and (max-width:540px){.profile__avatar{margin:0}}
+.profile__avatar{background-image:url(images/kusto.86c34fe8a5174a661498.jpg);background-position:50%;background-repeat:no-repeat;background-size:cover;border-radius:50%;height:120px;width:120px}.profile__avatar:before{content:"";height:120px;position:absolute;transition:.3s;width:120px}.profile__avatar:hover:before{background:#000c;background-image:url(images/pensil.ae1a976ddb506239e9f0.svg);background-position:50%;background-repeat:no-repeat}@media screen and (max-width:540px){.profile__avatar{margin:0}}
 .profile__title{color:#fff;font-size:42px;font-style:normal;font-weight:500;line-height:48px;margin:0;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media screen and (max-width:540px){.profile__title{font-size:27px;line-height:33px;margin:auto;max-width:200px}}
 .profile__edit{align-items:flex-end;display:flex;justify-content:space-between}@media screen and (max-width:540px){.profile__edit{padding-left:18px}}
 .profile__text{color:#fff;font-size:18px;font-style:normal;font-weight:400;line-height:22px;margin:16px 0 0;max-width:336px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media screen and (max-width:540px){.profile__text{font-size:14px;line-height:17px;margin:14px auto 36px;text-align:center}}
@@ -17,7 +17,7 @@
 .element{background-color:#fff;border-radius:10px;overflow:hidden;position:relative;width:282px}
 .element__image{background-position:50%;background-repeat:no-repeat;background-size:cover;height:282px;width:282px}.element__image:hover{cursor:pointer}
 .element__heading{align-items:center;color:#000;display:flex;justify-content:space-between;margin:25px 0 30px 21px;width:246px}
-.element__like-button{background:#0000;background-image:url(images/group.1ad06e85f169668a1f36.svg);background-position:50%;background-repeat:no-repeat;background-size:contain;border:0;cursor:pointer;height:19px;margin-right:5px;padding:0;width:22px}.element__like-button:hover{opacity:.5}
+.element__like-button{background:#0000;background-image:url(images/group.1ad06e85f169668a1f36.svg);background-position:50%;background-repeat:no-repeat;background-size:contain;border:0;cursor:pointer;height:19px;margin-bottom:5px;padding:0;width:22px}.element__like-button:hover{opacity:.5}
 .element__like-button_active{background-image:url(images/group_act.35948469632d0421d697.svg);opacity:1}
 .element__heading-text{font-size:24px;font-style:normal;font-weight:900;line-height:29px;margin:0;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .element__delete-button{background:#0000 url(images/trash.ce3b64935accf9b8212e.svg);background-repeat:no-repeat;background-size:contain;border:none;cursor:pointer;height:19px;position:absolute;right:20px;top:20px;width:18px}.element__delete-button:hover{background-color:#000;opacity:.5}
@@ -45,4 +45,6 @@
 .popup__submit_avatar{margin-top:48px}
 .popup__container_type_delete-confirm{height:181px}
 .popup__submit_type_delete-confirm{margin-top:38px}
+.element__like-wrap{display:flex;flex-direction:column}
+.element__like-count{text-align:center}
 
